@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Pre Authentication trigger lambda
+
+Globals:
+  Function:
+    Timeout: 20
+
+Resources:
+  HandlerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: 's3://blablabla/java.zip'
+      Handler: blablabla.preauth.App::handleRequest
+      Runtime: java11
+      MemorySize: 512
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        # creates API Gateway
+        PreAuthentication:
+          Type: Api
+          Properties:
+            Path: /handler
+            Method: get
